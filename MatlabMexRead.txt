@@ -1,0 +1,114 @@
+
+//Edit your computational routine to use mwSize for mxArray size n and index i.
+//mexErrMsgIdAndTxt("MyToolbox:arrayProduct:nrhs",
+//"Two inputs required.");
+/* make sure the first input argument is scalar */
+//if( !mxIsDouble(prhs[0]) ||
+//     mxIsComplex(prhs[0]) ||
+//     mxGetNumberOfElements(prhs[0])!=1 ) {
+//    mexErrMsgIdAndTxt("MyToolbox:arrayProduct:notScalar",
+//                      "Input multiplier must be a scalar.");
+//}
+
+//mxGetScalar If real elements in the mxArray are of a type other than double, mxGetScalar automatically converts the scalar value into a double. To preserve the original data representation of the scalar, cast the return value to the desired data type.
+
+//Use MX Matrix Library functions such as mxIsEmpty, mxIsLogical, mxIsNumeric, or mxIsChar to test for this condition before calling mxGetScalar.
+
+///* create a pointer to the real data in the input matrix  */
+//inMatrix = mxGetPr(prhs[1]);
+
+///* get dimensions of the input matrix */
+//ncols = mxGetN(prhs[1]);
+
+//mex arrayProduct.c
+
+
+
+//Workflow:
+//1.--------------
+//Creating a Gateway Function
+/* The gateway function */
+void mexFunction( int nlhs, mxArray *plhs[],
+                  int nrhs, const mxArray *prhs[])
+{
+/* variable declarations here */
+
+/* code here */
+}
+
+//2.--------------
+//Declaring Data Structures
+//Use type mxArray to handle MATLAB arrays. The following statement declares an mxArray named myData:
+
+//mxArray *myData;
+//To define the values of myData, use one of the mxCreate* functions. Some useful array creation routines are mxCreateNumericArray, mxCreateCellArray, and mxCreateCharArray. For example, the following statement allocates an m-by-1 floating-point mxArray initialized to 0:
+
+//myData = mxCreateDoubleMatrix(m, 1, mxREAL);
+
+//C/C++ programmers should note that data in a MATLAB array is in column-major order. (For an illustration, see Data Storage.) Use the MATLAB mxGet* array access routines, described in Manipulating Data, to read data from an mxArray.
+
+
+//The following statements read the input string prhs[0] into a C-style string buf:
+
+//char *buf;
+//int buflen;
+//int status;
+//buflen = mxGetN(prhs[0])*sizeof(mxChar)+1;
+//buf = mxMalloc(buflen);
+//status = mxGetString(prhs[0], buf, buflen);
+
+
+//Displaying Messages to the User
+//Use the mexPrintf function, as you would a C/C++ printf function, to print a string in the MATLAB Command Window. Use the mexErrMsgIdAndTxt and mexWarnMsgIdAndTxt functions to print error and warning information in the Command Window.
+
+//For example, using the variables declared in the previous example, you can print the input string prhs[0] as follows:
+
+//if (mxGetString(prhs[0], buf, buflen) == 0) {
+//    mexPrintf("The input string is:  %s\n", buf);
+//}
+
+
+//Handling Errors
+//The mexErrMsgIdAndTxt function prints error information and terminates your binary MEX-file. The mexWarnMsgIdAndTxt function prints information, but does not terminate the MEX-file. For example:
+
+//if (mxIsChar(prhs[0])) {
+//    if (mxGetString(prhs[0], buf, buflen) == 0) {
+//        mexPrintf("The input string is:  %s\n", buf);
+//    }
+//    else {
+//        mexErrMsgIdAndTxt("MyProg:ConvertString",
+//           "Could not convert string data.");
+//        // exit MEX-file
+//    }
+//}
+//else {
+//    mexWarnMsgIdAndTxt("MyProg:InputString",
+//        "Input should be a string to print properly.");
+//}
+
+//// continue with processing
+
+//Cleaning Up and Exiting
+//As described in Allocating and Freeing Memory, destroy any temporary arrays and free any dynamically allocated memory, except if such an mxArray is returned in the output argument list, returned by mexGetVariablePtr, or used to create a structure. Also, never delete input arguments.
+
+//Use mxFree to free memory allocated by the mxCalloc, mxMalloc, or mxRealloc functions. Use mxDestroyArray to free memory allocated by the mxCreate* functions.
+
+//Using Binary MEX-Files
+//Binary MEX-files are subroutines produced from C/C++ or Fortran source code. They behave just like MATLAB scripts and built-in functions. While scripts have a platform-independent extension .m, MATLAB identifies MEX-files by platform-specific extensions. The following table lists the platform-specific extensions for MEX-files.
+
+//Linux (64-bit) mexa64
+
+//You call MEX-files exactly as you call any MATLAB function. For example, on a Windows platform, there is a binary MEX-file called histc.mexw32 (in the MATLAB toolbox folder matlabroot\toolbox\matlab\datafun) that performs a histogram count. The file histc.m contains the help text documentation. When you call histc from MATLAB, the dispatcher looks through the list of folders on the MATLAB search path. It scans each folder looking for the first occurrence of a file named histc with either the corresponding file name extension from the table or .m. When it finds one, it loads the file and executes it. Binary MEX-files take precedence over .m files when like-named files exist in the same folder. However, help text documentation still reads from the .m file.
+
+//You cannot use a binary MEX-file on a platform if you compiled it on a different platform. Recompile the source code on the platform for which you want to use the MEX-file.
+
+
+classdef MyClass < SuperClass
+   function obj = MyClass(arg)
+      obj = obj@SuperClass(ArgumentList);
+         ...
+   end
+end
+
+
+

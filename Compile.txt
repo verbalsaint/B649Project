@@ -1,0 +1,13 @@
+g++6 tbbtestmain.cpp -I /myfiles/LinuxProject/verbalsaint/include -I /usr/local/MATLAB/R2011a/extern/include -ltbb
+
+
+/usr/local/MATLAB/R2011a/bin/mex CC=g++-4.3 CXX=g++-4.3 LD=g++-4.3 -cxx tbbtest.cpp -I/myfiles/LinuxProject/verbalsaint/include -I/usr/local/MATLAB/R2011a/extern/include -ltbb -lrt -o tbbtest
+
+cp tbbtest.mexa64 ~/Documents/MATLAB/
+
+Matlab Code For Testing:
+A=randn(100,10);
+B=randn(10,1000);
+Res = tbbtest(A,B);
+
+tStart=tic;Nres=A*B;tElapsed = toc(tStart);
